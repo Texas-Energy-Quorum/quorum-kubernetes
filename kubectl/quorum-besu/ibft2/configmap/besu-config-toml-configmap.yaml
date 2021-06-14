@@ -22,7 +22,7 @@ data:
     # rpc-http-authentication-credentials-file="none"
     # TODO : insert as command line & mount Volume
     # rpc-ws-authentication-credentials-file="none"
-    logging="DEBUG"
+    logging="INFO"
 
     # Transaction Pool
     tx-pool-retention-hours=999

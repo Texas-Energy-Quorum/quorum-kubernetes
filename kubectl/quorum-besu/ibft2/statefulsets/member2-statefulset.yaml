@@ -7,7 +7,7 @@ metadata:
   namespace: besu
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: member2-key-read-role
@@ -21,7 +21,7 @@ rules:
     resources: ["services"]
     verbs: ["get", "list"]
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: member2-rb
@@ -104,7 +104,7 @@ spec:
             - containerPort: 9080
               name: tessera-tp
               protocol: TCP
-            - containerPort: 9081
+            - containerPort: 9101
               name: tessera-q2t
               protocol: TCP
           command:
@@ -136,7 +136,7 @@ spec:
                     {
                       "app":"Q2T",
                       "enabled": true,
-                      "serverAddress": "http://besu-member1.besu.svc.cluster.local:9081",
+                      "serverAddress": "http://besu-member2.besu.svc.cluster.local:9101",
                       "communicationType" : "REST"
                     },
                     {
@@ -242,20 +242,15 @@ spec:
             - |
               exec
               /opt/besu/bin/besu \
-                --node-private-key-file=/secrets/key \
+                --node-private-key-file=/secrets/nodekey \
                 --config-file=/etc/besu/config.toml \
                 --privacy-enabled=true \
-                --privacy-url=http://${BESU_MEMBER2_SERVICE_HOST}:9101 \
+                --privacy-url=http://${BESU_MEMBER2_SERVICE_HOST}:9080 \
                 --privacy-public-key-file=/secrets/tm.pub \
                 --privacy-onchain-groups-enabled=false \
                 --Xdns-enabled=true --Xdns-update-enabled=true --Xnat-kube-service-name=besu-member2 \
                 --bootnodes=enode://${VALIDATOR1_PUBKEY}@validator1-0.besu-validator1.besu.svc.cluster.local:30303,enode://${VALIDATOR2_PUBKEY}@validator2-0.besu-validator2.besu.svc.cluster.local:30303
-          livenessProbe:
-            httpGet:
-              path: /liveness
-              port: 8545
-            initialDelaySeconds: 60
-            periodSeconds: 30
+
       volumes:
         - name: key
           secret:

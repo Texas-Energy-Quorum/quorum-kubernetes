@@ -7,7 +7,7 @@ metadata:
   namespace: besu
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: validator1-key-read-role
@@ -21,7 +21,7 @@ rules:
   resources: ["services"]
   verbs: ["get", "list"]
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: validator1-rb
@@ -129,12 +129,6 @@ spec:
                 --config-file=/etc/besu/config.toml \
                 --Xdns-enabled=true --Xdns-update-enabled=true --Xnat-kube-service-name=besu-validator1 \
                 --bootnodes=enode://${VALIDATOR1_PUBKEY}@validator1-0.besu-validator1.besu.svc.cluster.local:30303,enode://${VALIDATOR2_PUBKEY}@validator2-0.besu-validator2.besu.svc.cluster.local:30303
-          livenessProbe:
-            httpGet:
-              path: /liveness
-              port: 8545
-            initialDelaySeconds: 60
-            periodSeconds: 30
       volumes:
         - name: key
           secret:
