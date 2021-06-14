@@ -137,6 +137,9 @@ spec:
                       "app":"Q2T",
                       "enabled": true,
                       "serverAddress": "http://besu-member2.besu.svc.cluster.local:9101",
+                      "sslConfig": {
+                        "tls": "OFF"
+                      },
                       "communicationType" : "REST"
                     },
                     {
@@ -177,7 +180,7 @@ spec:
                   java -Xms128M -Xmx128M -jar /tessera/tessera-app.jar -configfile /data/tm/tessera-config-09.json
 
         - name: member2-besu
-          image: hyperledger/besu:latest
+          image: hyperledger/besu:21.1.2
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -245,7 +248,7 @@ spec:
                 --node-private-key-file=/secrets/nodekey \
                 --config-file=/etc/besu/config.toml \
                 --privacy-enabled=true \
-                --privacy-url=http://${BESU_MEMBER2_SERVICE_HOST}:9080 \
+                --privacy-url=http://localhost:9101 \
                 --privacy-public-key-file=/secrets/tm.pub \
                 --privacy-onchain-groups-enabled=false \
                 --Xdns-enabled=true --Xdns-update-enabled=true --Xnat-kube-service-name=besu-member2 \

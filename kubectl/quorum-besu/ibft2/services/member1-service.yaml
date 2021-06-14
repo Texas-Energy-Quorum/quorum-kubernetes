@@ -6,7 +6,7 @@ metadata:
     app: member1
   namespace: besu
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: member1
   ports:
@@ -22,7 +22,6 @@ spec:
       targetPort: 8545
       protocol: TCP
       name: json-rpc
-      nodePort: 30031
     - port: 8546
       targetPort: 8546
       protocol: TCP
@@ -39,7 +38,7 @@ spec:
       targetPort: 9080
       protocol: TCP
       name: tessera-tp
-    - port: 9081
-      targetPort: 9081
+    - port: 9101
+      targetPort: 9101
       protocol: TCP
       name: tessera-q2t

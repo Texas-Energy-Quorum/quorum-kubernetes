@@ -32,32 +32,21 @@ validators:
   cpuRequest: "100m"
   cpuLimit: "500m"
   validator1:
-    privateKey: "0x8457b1dc606d05308cc96f604dbde54ad85cb4de508742c8e265080b9e08b48c"
+    privateKey: "0fd4aecd8f02b24f468325aa06e1428ab8076d283bac3ed804c9f70187dedb63"
     publicKey: "0x5d812c3c25ff398ab416968fce9009c2be7ed70a87abc8ea30bd667ce17a9287a6341fbf6ce757bb8148436c39c71296639ea81afcc94cdf908b6e1344f26188"
 
   validator2:
-    privateKey: "0xa53a0dea5e51a9e0735e331b336af65d60f516c7080a52da683f6fd96342be42"
+    privateKey: "47c63c0afd1a85b16915934a2d75cf5a0d3bd13c509d6ee9d7ef1315a36bdc0a"
     publicKey: "0xb2fba529681ea7f4619556753d40c8689b936fb1c621bc91f94d2938eb58c285d4911457ae4887b9c3bd593b2d608d319c6dc384d6acae2d043a4657029178d3"
 
   validator3:
-    privateKey: "0x28021485044bf6870160f90b82ab6bbd14c691d4414140a63d047a7e3362c64e"
+    privateKey: "35dcc853354b24e98889fa4b2e214d5e92e759ef8312bb6a444bad3182187b68"
     publicKey: "0x00b20ab6a385a2403d64637b3d93cb6d83215a08f29adb6feb4b8bf03387b734444e8b060f53150dea4b9b897823540d19918c13d6f57a5153d190b5fad7bf51"
 
   validator4:
-    privateKey: "0xfb122a05ab1897ff144e1c9efb0bb3144f1e7f319aa5c55e20ef3d8d8464f4e8"
+    privateKey: "d38e71552943e18061fdb44a72eca14ea193e0505a7ead404864f9840e275b49"
     publicKey: "0x5fc1f8dc9f0c03087128e4bd724530e883d7de1a431269876dff9c95b8952f73c7e85ac7b49d85a2ad4950e967319482af435e07a0eab0a98d98449437787a00"
 
-orions:
-  pvcSizeLimit: "1Gi"
-  pvcStorageClass: "standard"
-  memRequest: "512Mi"
-  memLimit: "1024Mi"
-  cpuRequest: "100m"
-  cpuLimit: "500m"
-  orion1:
-    publicKey: "Q7U40nEBpSg4AmieAKZ+4CB8wteH6eE57EDqOH34DRc="
-  orion2:
-    publicKey: "SratFoTK6Nh0206JeeuOP6FSZ/m5I0LBm00flpTqmQE="
 
 # common parameters to all nodes
 besuConfig:
@@ -74,14 +63,14 @@ besuConfig:
     enabled: true
     host: "0.0.0.0"
     port: 8545
-    api: '["DEBUG","ETH", "ADMIN", "WEB3", "IBFT", "NET"]'
+    api: '["DEBUG","ETH", "ADMIN", "WEB3", "IBFT", "NET", "EEA", "WEB3", "PRIV", "PERM"]'
     corsOrigins: '["all"]'
     authenticationEnabled: false
   ws:
     enabled: false
     host: "0.0.0.0"
     port: 8546
-    api: '["DEBUG", "ETH", "WEB3", "NET"]'
+    api: '["DEBUG","ETH", "ADMIN", "WEB3", "IBFT", "NET", "EEA", "WEB3", "PRIV", "PERM"]'
     authenticationEnabled: false
   graphql:
     enabled: false
@@ -105,7 +94,7 @@ besuConfig:
     prometheusJob: "besu"
   privacy:
     enabled: false
-    url: "http://127.0.0.1:8888"
+    url: "http://127.0.0.1:9080"
     precompiledAddress: 9
   permissions:
     enabled: false
